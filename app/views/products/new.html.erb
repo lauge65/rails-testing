@@ -1,0 +1,13 @@
+<%= simple_form_for @product do |f| %>
+<%= f.input :name %>
+<%= f.input :tagline %>
+<%= f.submit "Create Product" %>
+<% end %>
+
+<% if @product.errors.any? %>
+  <ul>
+    <% @product.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>

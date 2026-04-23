@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+
   def index
     @products = Product.all
   end
@@ -11,9 +12,15 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path, notice: "Product was successfully created."
+      redirect_to root_path, notice: "Product was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :tagline)
   end
 end
